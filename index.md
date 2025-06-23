@@ -1,6 +1,6 @@
 
 # Custom Object Detection
-Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!
+<!-- Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
 
 You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
 ```HTML
@@ -12,7 +12,7 @@ You should comment out all portions of your portfolio that you have not complete
 |:--:|:--:|:--:|:--:|
 | Nikhil B | Irvington High School | Electrical Engineering | Incoming Sophmore
 
-**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
+<!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
 ![Headstone Image](logo.svg)
   
@@ -40,18 +40,17 @@ For your second milestone, explain what you've worked on since your previous mil
 - Technical details of what you've accomplished and how they contribute to the final goal
 - What has been surprising about the project so far
 - Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+- What needs to be completed before your final milestone -->
 
 # First Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
+<!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.** -->
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For your first milestone, describe what your project is and how you plan to build it. You can include:
 My project has three main hardware components. 1. The raspberry pi is the main brain, and connects everything together. 2. The camera is connected to the raspberry pi, and is the eyes of the project. The display allows the user to see what the camera is seeing. So far, I have combined all my hardware components together and set up an SSH so I can access raspberry pi command line from my mac. In addition I have installed a VNC so I can access the raspberry pi's user interface from my mac. I have also initialized the camera and have taken some initial test pictures. To summarize I have completed most of the hardware components of my project in addition to the setup of the raspberry pi. The biggest challenge I faced was a power issue with the raspberry pi. The flashing light indicated that there was a power shortage, though I had used the correct 5 volt power supply. When I disconnocted my display, the power issue solved, and I realised I had plugged in my display backwards. After fixing this issue the power issue with the pi also resolved. To continue with my project, I have to download teachable machine to train my raspberry pi to detect objects. In addition I have to setup more software with the raspberry pi to make the project complete. 
 
-# Schematics 
+<!-- # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
 # Code
@@ -70,7 +69,7 @@ void loop() {
 }
 ```
 
-# Bill of Materials
+ # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
 Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
 
@@ -86,7 +85,7 @@ One of the best parts about Github is that you can view how other people set up 
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
 
-To watch the BSE tutorial on how to create a portfolio, click here.
+To watch the BSE tutorial on how to create a portfolio, click here. -->
 
 # RGB Slider Starter Project
 
@@ -94,4 +93,4 @@ To watch the BSE tutorial on how to create a portfolio, click here.
 
 The RGB Slider came with a board, 3 sliders, and a light. The three sliders work together to create a different shade of color on the light. In order to put all the pieces together, I soldered the sliders, and the light to the board. The main challenge I faced was adding to much solder to the connections. I had to be careful not to short any connections, and I made to use a multimeter to check all my connections. The RGB slider ended up working when I plugged it in. It allowed me to be more confident with using a soldering iron. 
 
-IMG_2569.jpg 
+<img src="IMG_2569.jpg" width="300" height ="400">
