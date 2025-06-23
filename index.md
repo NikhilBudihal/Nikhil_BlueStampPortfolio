@@ -88,4 +88,4 @@ To watch the BSE tutorial on how to create a portfolio, click here. -->
 
 The RGB Slider came with a board, 3 sliders, and a light. The three sliders work together to create a different shade of color on the light. In order to put all the pieces together, I soldered the sliders, and the light to the board. The main challenge I faced was adding to much solder to the connections. I had to be careful not to short any connections, and I made to use a multimeter to check all my connections. The RGB slider ended up working when I plugged it in. It allowed me to be more confident with using a soldering iron. 
 
-<img src="IMG_2569.jpg" width="300" height ="400"> <img src="IMG_2571.jpg" width="300" height ="400">
+<img src="IMG_2569.jpg" width="450" height ="600"> <img src="IMG_2571.jpg" width="450" height ="600">
