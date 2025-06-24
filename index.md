@@ -21,7 +21,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 - What you've accomplished since your previous milestone
 - What your biggest challenges and triumphs were at BSE
 - A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
+- What you hope to learn in the future after everything you've learned at BSE -->
 
 
 
@@ -32,16 +32,13 @@ For your final milestone, explain the outcome of your project. Key details to in
 <iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- Technical details of what you've accomplished and how they contribute to the final goal
-- What has been surprising about the project so far
-- Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone -->
+For my second milestone I have downloaded all the software required for my object detection system to work. This includes Tensorflow for the object detection, Blinka for the display, and a few more files for the camera. At this point my project can detect certain objects within the Tensorflow database using the raspberry pi camera and display them on the display. Something that surprised me were the amount of files and packages that requred downloading to get all of the components working. The biggest challenge I faced was using a virtual environment to download necessary files. Virtual environments allow me to download specific versions of files without affecting the rest of my raspberry pi system. I struggled setting these virtual environments up and deactivating them. In order to complete my final milestone, I need to train my project to detect specific objects using the Teachable Machine software. This will allow me to expand the amount of dectable objects further than just the tensorflow database. 
 
 # First Milestone
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.** -->
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="996" height="560" src="https://www.youtube.com/embed/_Q_0KqwxaLQ" title="Nikhil B. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 My project has three main hardware components. 1. The raspberry pi is the main brain, and connects everything together. 2. The camera is connected to the raspberry pi, and is the eyes of the project. The display allows the user to see what the camera is seeing. So far, I have combined all my hardware components together and set up an SSH so I can access raspberry pi command line from my mac. In addition I have installed a VNC so I can access the raspberry pi's user interface from my mac. I have also initialized the camera and have taken some initial test pictures. To summarize I have completed most of the hardware components of my project in addition to the setup of the raspberry pi. The biggest challenge I faced was a power issue with the raspberry pi. The flashing light indicated that there was a power shortage, though I had used the correct 5 volt power supply. When I disconnocted my display, the power issue solved, and I realised I had plugged in my display backwards. After fixing this issue the power issue with the pi also resolved. To continue with my project, I have to download teachable machine to train my raspberry pi to detect objects. In addition I have to setup more software with the raspberry pi to make the project complete. 
 
