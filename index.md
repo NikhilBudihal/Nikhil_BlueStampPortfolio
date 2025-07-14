@@ -13,15 +13,14 @@
   
  <!-- # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE -->
+
+## Summary
+## Challenges
+## Topics I learned
+## Future Goals
 
 
 
@@ -47,7 +46,14 @@ Ultimately, my goal is to build a fully functional coin sorter that can accurate
 
 <iframe width="996" height="560" src="https://www.youtube.com/embed/_Q_0KqwxaLQ" title="Nikhil B. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-My project has three main hardware components. 1. The raspberry pi is the main brain, and connects everything together. 2. The camera is connected to the raspberry pi, and is the eyes of the project. The display allows the user to see what the camera is seeing. So far, I have combined all my hardware components together and set up an SSH so I can access raspberry pi command line from my mac. In addition I have installed a VNC so I can access the raspberry pi's user interface from my mac. I have also initialized the camera and have taken some initial test pictures. To summarize I have completed most of the hardware components of my project in addition to the setup of the raspberry pi. The biggest challenge I faced was a power issue with the raspberry pi. The flashing light indicated that there was a power shortage, though I had used the correct 5 volt power supply. When I disconnocted my display, the power issue solved, and I realised I had plugged in my display backwards. After fixing this issue the power issue with the pi also resolved. To continue with my project, I have to download teachable machine to train my raspberry pi to detect objects. In addition I have to setup more software with the raspberry pi to make the project complete. 
+## Summary
+My project includes three main hardware components that work together to enable object detection on a Raspberry Pi: 1. The Raspberry Pi, which serves as the central processing unit and connects all the hardware and software components. 2. The Camera Module, which functions as the visual sensor, capturing images and video for processing. 3. The Display, which shows what the camera sees and provides a user interface for visual feedback. So far, I have successfully connected all three components and completed most of the initial hardware setup. I established an SSH (Secure Shell) connection so I can control the Raspberry Pi’s command line remotely from my Mac. This makes it easier to run commands, install packages, and update scripts without needing to connect an external keyboard or monitor to the Pi. In addition to SSH, I installed VNC (Virtual Network Computing), which gives me full access to the Raspberry Pi's desktop interface from my Mac, allowing me to view and interact with the Pi’s GUI just like I would on a regular computer. I’ve also initialized the camera and conducted a few test runs, successfully capturing still images to confirm that the camera is connected and functioning correctly. This sets the foundation for the next stage of the project, which involves integrating object detection capabilities.
+
+## Challenges
+One of the most significant issues I faced during this milestone was a power delivery problem with the Raspberry Pi. When everything was connected and powered on, the onboard status LED began flashing in a pattern that indicated a power issue. This was confusing because I was using a proper 5V power supply rated for the Raspberry Pi. To troubleshoot, I began disconnecting components one by one. I noticed that when I removed the display, the power issue disappeared. Upon further investigation, I realized that I had accidentally plugged in the display backwards. This incorrect connection likely caused the display to draw power improperly, triggering the Pi’s built-in undervoltage warning. Once I corrected the orientation of the display and reconnected it properly, the power issue resolved completely, and the system operated normally. This experience taught me how sensitive the Raspberry Pi can be to incorrect connections, especially with components that connect directly to the GPIO header or draw significant power. It also highlighted the importance of double-checking hardware orientation before powering the system
+
+## Next Steps
+Moving forward, I will begin working on the software side of the object detection system. The next major task is to train the Raspberry Pi to recognize specific objects, which will be essential for the final application of the project. I plan to use Google's Teachable Machine, an online tool that allows users to easily train machine learning models by uploading and labeling images. Once I train a custom model using images of the objects I want to detect (e.g., different types of coins), I will convert the model into a format compatible with the Raspberry Pi, such as TensorFlow Lite. This lightweight version is optimized for performance on small, resource-limited devices. In addition to training and deploying the model, I also need to install and configure additional software libraries on the Raspberry Pi, including packages for handling real-time camera input, processing detection results, and eventually controlling motors or other hardware for physical interaction. By completing these steps, I’ll be ready to transition from setup and testing into the actual object detection and sorting logic that will bring the full functionality of my project to life.
 
 <!-- # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
