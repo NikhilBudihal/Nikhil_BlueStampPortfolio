@@ -55,8 +55,8 @@ One of the most significant issues I faced during this milestone was a power del
 ## Next Steps
 Moving forward, I will begin working on the software side of the object detection system. The next major task is to train the Raspberry Pi to recognize specific objects, which will be essential for the final application of the project. I plan to use Google's Teachable Machine, an online tool that allows users to easily train machine learning models by uploading and labeling images. Once I train a custom model using images of the objects I want to detect (e.g., different types of coins), I will convert the model into a format compatible with the Raspberry Pi, such as TensorFlow Lite. This lightweight version is optimized for performance on small, resource-limited devices. In addition to training and deploying the model, I also need to install and configure additional software libraries on the Raspberry Pi, including packages for handling real-time camera input, processing detection results, and eventually controlling motors or other hardware for physical interaction. By completing these steps, I’ll be ready to transition from setup and testing into the actual object detection and sorting logic that will bring the full functionality of my project to life.
 
- # Schematics 
 
+# Schematics
 
 <img src="Schematic.jpg" width="400" height ="400"> 
 
@@ -202,8 +202,8 @@ finally:
     cv2.destroyAllWindows()
 ```
 
+# Bill of Materials
 
- # Bill of Materials
  
 <!--Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
 Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. -->
