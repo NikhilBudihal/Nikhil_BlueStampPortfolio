@@ -1,6 +1,6 @@
 
 # Custom Object Detection
-<!-- Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
+Imagine dropping a coin onto a platform and watching as a smart system instantly identifies and sorts it—all without any human input. My project is a coin sorter powered by computer vision and machine learning, designed to recognize different types of coins using a Raspberry Pi. 
 
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
@@ -20,7 +20,7 @@
 ## Summary
 ## Challenges
 ## Topics I learned
-## Future Goals
+## Future Goals -->
 
 
 
