@@ -9,7 +9,7 @@
 
 <!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.** -->
 
-<img src="NikhilB.jpg" width="500" height ="600">
+<img src="NikhilB.jpg" width="500" height ="700">
   
  <!-- # Final Milestone
 
