@@ -41,7 +41,7 @@ For my second milestone I have downloaded all the software required for my objec
 
 My project has three main hardware components. 1. The raspberry pi is the main brain, and connects everything together. 2. The camera is connected to the raspberry pi, and is the eyes of the project. The display allows the user to see what the camera is seeing. So far, I have combined all my hardware components together and set up an SSH so I can access raspberry pi command line from my mac. In addition I have installed a VNC so I can access the raspberry pi's user interface from my mac. I have also initialized the camera and have taken some initial test pictures. To summarize I have completed most of the hardware components of my project in addition to the setup of the raspberry pi. The biggest challenge I faced was a power issue with the raspberry pi. The flashing light indicated that there was a power shortage, though I had used the correct 5 volt power supply. When I disconnocted my display, the power issue solved, and I realised I had plugged in my display backwards. After fixing this issue the power issue with the pi also resolved. To continue with my project, I have to download teachable machine to train my raspberry pi to detect objects. In addition I have to setup more software with the raspberry pi to make the project complete. 
 
-<!-- # Schematics 
+# Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
 # Code
@@ -59,17 +59,19 @@ void loop() {
 
 }
 ```
--->
+
 
  # Bill of Materials
-<!-- Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
+Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
 Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
 
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
+| Raspberry Pi (Canakit) | Computer System that controls everything | $Price | <a href="[https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/CanaKit-Raspberry-4GB-Starter-Kit/dp/B07V5JTMV9/ref=sr_1_3?crid=RKVPRUNT9HW5&dib=eyJ2IjoiMSJ9.na9CetPjFi_FxZyBgpAsrzsNv6dicwLzRFdua87NS7K3F1jRt8gqGO5--fumv5e3wfR7IXE8-SKZvldeVpniJ2BEIHHF7MHQJpaveZRn_FfB0ggQ_kbr9AVJquOMaf7t0vGL1YRe3nGzoeLzZWmVoGMNH3c3VkS4jVMxkgGswLoSYxc3zNNOlttTrGmGPdfEwZjXKIOaJ8ZpwnpEKmplEpwfnSCulGvOeuoYn3ghyuU.g7jXOZ3fJji-DZgtkWeYRzS2_bk0jwq_aNtQdSqk9_w&dib_tag=se&keywords=raspberry%2Bpi%2Bcanakit&qid=1752508604&sprefix=raspberry%2Bpi%2Bcanaki%2Caps%2C188&sr=8-3&th=1)"> Link </a> |
+| Adafruit Braincraft HAT | Contains project's display | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
+| Pi Camera Module 3 | Gives Raspberry pi data for object detection | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
+| MG90S Servo Motor | Turns tilt platform | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
+| Tilt Adjustable Camera Mount | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
@@ -77,7 +79,7 @@ One of the best parts about Github is that you can view how other people set up 
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
 
-To watch the BSE tutorial on how to create a portfolio, click here. -->
+To watch the BSE tutorial on how to create a portfolio, click here. 
 
 # RGB Slider Starter Project
 
