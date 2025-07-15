@@ -9,7 +9,7 @@ Imagine dropping a coin onto a platform and watching as a smart system instantly
 
 <!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.** -->
 
-<img src="NikhilB.jpg" width="300" height ="500">
+<img src="NikhilB.jpg" width="400" height ="500">
   
 # Final Milestone
 
@@ -61,7 +61,7 @@ Moving forward, I will begin working on the software side of the object detectio
 
 # Schematics
 
-<img src="Schematic.jpg" width="400" height ="400"> 
+<img src="Schematic.jpg" width="500" height ="400"> 
 
 # Code
 
