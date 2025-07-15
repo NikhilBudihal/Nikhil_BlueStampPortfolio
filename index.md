@@ -1,5 +1,5 @@
 
-# Custom Object Detection
+# Coin Sorter
 Imagine dropping a coin onto a platform and watching as a smart system instantly identifies and sorts it all without any human input. My project is a coin sorter powered by computer vision and machine learning, designed to recognize different types of coins using a Raspberry Pi. 
 
 
