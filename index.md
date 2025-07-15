@@ -14,7 +14,7 @@ Imagine dropping a coin onto a platform and watching as a smart system instantly
 # Final Milestone
 
 
-<iframe width="996" height="560" src="https://www.youtube.com/embed/fnVgC39U6zM" title="Nikhil B. Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fnVgC39U6zM" title="Nikhil B. Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## Summary
@@ -31,7 +31,7 @@ Throughout the course of my project, I gained hands-on experience with a wide ra
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.** -->
 
-<iframe width="996" height="560" src="https://www.youtube.com/embed/ziyV15nrAKM" title="Nikhil B. Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ziyV15nrAKM" title="Nikhil B. Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Summary
 For my second milestone, I successfully downloaded and installed all the necessary software components required for my object detection system to function properly. This included TensorFlow, which powers the core object detection functionality, Blinka, which enables communication with the Adafruit BrainCraft Hat display, and additional libraries and drivers to support the Raspberry Pi camera module. At this stage, my system is capable of detecting a range of pre-trained objects from the TensorFlow model zoo and visually identifying them in real-time using the camera and displaying the results on the BrainCraft Hat screen. One thing that caught me off guard during this process was the sheer number of dependencies, files, and configuration steps required to get all the components working in sync. From Python packages to hardware interface libraries, each component had its own setup and quirks, making the integration a significant task.
@@ -47,7 +47,7 @@ Ultimately, my goal is to build a fully functional coin sorter that can accurate
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.** -->
 
-<iframe width="996" height="560" src="https://www.youtube.com/embed/_Q_0KqwxaLQ" title="Nikhil B. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_Q_0KqwxaLQ" title="Nikhil B. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Summary
 My project includes three main hardware components that work together to enable object detection on a Raspberry Pi: 1. The Raspberry Pi, which serves as the central processing unit and connects all the hardware and software components. 2. The Camera Module, which functions as the visual sensor, capturing images and video for processing. 3. The Display, which shows what the camera sees and provides a user interface for visual feedback. So far, I have successfully connected all three components and completed most of the initial hardware setup. I established an SSH (Secure Shell) connection so I can control the Raspberry Pi’s command line remotely from my Mac. This makes it easier to run commands, install packages, and update scripts without needing to connect an external keyboard or monitor to the Pi. In addition to SSH, I installed VNC (Virtual Network Computing), which gives me full access to the Raspberry Pi's desktop interface from my Mac, allowing me to view and interact with the Pi’s GUI just like I would on a regular computer. I’ve also initialized the camera and conducted a few test runs, successfully capturing still images to confirm that the camera is connected and functioning correctly. This sets the foundation for the next stage of the project, which involves integrating object detection capabilities.
