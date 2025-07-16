@@ -92,20 +92,48 @@ In addition to training and deploying the model, I also need to install and conf
 
 
 ```c++
-import RPi.GPIO as GPIO
 import time
+import board
+import adafruit_dotstar
+import RPi.GPIO as GPIO
 import cv2
 import numpy as np
 from picamera2 import Picamera2
 from tflite_runtime.interpreter import Interpreter
+from digitalio import DigitalInOut, Direction, Pull
+
+# === DotStar LED Setup ===
+DOTSTAR_DATA = board.D5
+DOTSTAR_CLOCK = board.D6
+dots = adafruit_dotstar.DotStar(DOTSTAR_CLOCK, DOTSTAR_DATA, 3, brightness=0.3, auto_write=False)
+
+def turn_off_leds():
+    for i in range(3):
+        dots[i] = (0, 0, 0)
+    dots.show()
+
+# === Joystick Setup ===
+BUTTON_PIN = board.D17  # Not used here, but can be if desired
+JOYDOWN_PIN = board.D27
+JOYLEFT_PIN = board.D22
+JOYUP_PIN = board.D23
+JOYRIGHT_PIN = board.D24
+JOYSELECT_PIN = board.D16
+
+buttons = [BUTTON_PIN, JOYUP_PIN, JOYDOWN_PIN, JOYLEFT_PIN, JOYRIGHT_PIN, JOYSELECT_PIN]
+for i, pin in enumerate(buttons):
+    buttons[i] = DigitalInOut(pin)
+    buttons[i].direction = Direction.INPUT
+    buttons[i].pull = Pull.UP
+
+button, joyup, joydown, joyleft, joyright, joyselect = buttons
 
 # === Servo Setup ===
 GPIO.setmode(GPIO.BCM)
 servo_pin = 17
 GPIO.setup(servo_pin, GPIO.OUT)
-
-pwm = GPIO.PWM(servo_pin, 50)  # 50 Hz for servo
-pwm_started = False  # Start only when needed
+pwm = GPIO.PWM(servo_pin, 50)  # 50 Hz
+pwm_started = False
 
 def set_angle(angle, delay=0.4):
     global pwm_started
@@ -113,7 +141,6 @@ def set_angle(angle, delay=0.4):
         pwm.start(0)
         pwm_started = True
         time.sleep(0.1)
-
     duty = 2 + (angle / 18)
     pwm.ChangeDutyCycle(duty)
     time.sleep(delay)
@@ -121,13 +148,13 @@ def set_angle(angle, delay=0.4):
 
 def tilt_servo(label):
     if label == "Penny":
-        print("? Penny detected ? tilting RIGHT")
+        print("🟢 Penny detected — tilting RIGHT")
         set_angle(120)
     elif label == "Quarter":
-        print("? Quarter detected ? tilting LEFT")
+        print("🔴 Quarter detected — tilting LEFT")
         set_angle(60)
     time.sleep(0.4)
-    print("?? Returning to CENTER")
+    print("↩️ Returning to CENTER")
     set_angle(90)
 
 # === Model and label loading ===
@@ -145,7 +172,6 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 _, height, width, _ = input_details[0]['shape']
 
-# === Classification ===
 def classify_image(image):
     input_tensor = np.expand_dims(image.astype(np.float32) / 255.0, axis=0)
     interpreter.set_tensor(input_details[0]['index'], input_tensor)
@@ -153,7 +179,7 @@ def classify_image(image):
     output = interpreter.get_tensor(interpreter.get_output_details()[0]['index'])[0]
     return np.argmax(output), output[np.argmax(output)]
 
-# === Camera setup ===
+# === Camera Setup ===
 picam2 = Picamera2()
 picam2.preview_configuration.main.size = (250, 250)
 picam2.preview_configuration.main.format = "RGB888"
@@ -166,7 +192,7 @@ WINDOW_NAME = "Picamera2 - Coin Detection"
 cv2.namedWindow(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN)
 cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-# === Detection logic ===
+# === Detection Logic ===
 CONFIDENCE_THRESHOLD = 0.7
 HOLD_TIME = 1
 
@@ -174,7 +200,16 @@ current_label = None
 start_time = None
 action_done = False
 
-print("? Ready. Servo stays at 90° until a confident match is held for 3 seconds.")
+penny_count = 0
+quarter_count = 0
+
+# Variables for blue wave animation
+wave_index = 0
+last_wave_update = time.time()
+WAVE_DELAY = 0.3  # seconds between LED steps
+
+print("🚦 Ready. Servo stays at 90° until a confident match is held for 1 second.")
+print("🔄 Joystick UP to reset counters. Joystick DOWN to reset servo. Joystick SELECT to quit.")
 
 try:
     while True:
@@ -185,49 +220,111 @@ try:
         label = labels[label_id]
         now = time.time()
 
-        # Detection + timer logic
+        # Check joystick DOWN for servo reset
+        if not joydown.value:
+            print("↩️ Joystick DOWN pressed — resetting servo to 90°")
+            set_angle(90)
+            time.sleep(0.5)  # debounce
+
+        # Check joystick SELECT to quit
+        if not joyselect.value:
+            print("🛑 Joystick SELECT pressed. Exiting program.")
+            break
+
+        # Check joystick UP to reset counters
+        if not joyup.value:
+            penny_count = 0
+            quarter_count = 0
+            print("🔄 Counters reset by joystick UP.")
+            time.sleep(0.5)  # debounce
+
+        # Check for confident detection of Penny or Quarter
         if confidence >= CONFIDENCE_THRESHOLD and label in ["Penny", "Quarter"]:
+            # Set LEDs: green for Penny, red for Quarter
+            if label == "Penny":
+                for i in range(3):
+                    dots[i] = (0, 255, 0)
+                dots.show()
+            elif label == "Quarter":
+                for i in range(3):
+                    dots[i] = (255, 0, 0)
+                dots.show()
+
             if label == current_label:
                 if start_time is None:
                     start_time = now
                 elif (now - start_time >= HOLD_TIME) and not action_done:
                     tilt_servo(label)
+                    if label == "Penny":
+                        penny_count += 1
+                    elif label == "Quarter":
+                        quarter_count += 1
                     action_done = True
             else:
                 current_label = label
                 start_time = now
                 action_done = False
+            last_wave_update = now
         else:
             current_label = None
             start_time = None
             action_done = False
 
-        # Display frame with label overlay
+            # Blue wave animation on idle
+            if now - last_wave_update > WAVE_DELAY:
+                for i in range(3):
+                    if i == wave_index:
+                        dots[i] = (0, 0, 255)  # bright blue
+                    else:
+                        dots[i] = (0, 0, 50)   # dim blue
+                dots.show()
+                wave_index = (wave_index + 1) % 3
+                last_wave_update = now
+
+        # === Overlay Display ===
         display_frame = cv2.resize(frame, (244, 244))
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        frame_h, frame_w = display_frame.shape[:2]
+
+        font_scale = 0.65
+        line_height = 25
+        left_x = 10
+        y_start = 25
+
+        total_value = (penny_count * 0.01) + (quarter_count * 0.25)
+        cv2.putText(display_frame, f"Total: ${total_value:.2f}", (left_x, y_start), font, font_scale, (255, 255, 255), 2)
+        cv2.putText(display_frame, f"Pennies: {penny_count}", (left_x, y_start + line_height), font, font_scale, (0, 200, 255), 2)
+        cv2.putText(display_frame, f"Quarters: {quarter_count}", (left_x, y_start + 2 * line_height), font, font_scale, (0, 200, 255), 2)
+
+        # Detected label – bottom center
         if confidence >= CONFIDENCE_THRESHOLD:
             label_text = f"{label}"
-            color = (0, 255, 0) if confidence >= 0.75 else (0, 0, 255)
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 0.7
-            thickness = 2
-            text_size, _ = cv2.getTextSize(label_text, font, font_scale, thickness)
-            text_x = (244 - text_size[0]) // 2
-            text_y = 244 - 10
-            cv2.putText(display_frame, label_text, (text_x, text_y),
-                        font, font_scale, color, thickness)
+            label_color = (0, 255, 0) if confidence >= 0.75 else (0, 0, 255)
+            (label_w, _), _ = cv2.getTextSize(label_text, font, 0.75, 2)
+            label_x = (frame_w - label_w) // 2
+            label_y = frame_h - 10
+            cv2.putText(display_frame, label_text, (label_x, label_y), font, 0.75, label_color, 2)
 
         cv2.imshow(WINDOW_NAME, display_frame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # Keyboard fallback controls
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord('q'):
             break
+        elif key == ord('r'):
+            penny_count = 0
+            quarter_count = 0
+            print("🔄 Counters reset (keyboard).")
 
 finally:
-    print("? Cleaning up GPIO and camera")
+    print("🧹 Cleaning up GPIO, camera, and turning off LEDs...")
+    turn_off_leds()
     if pwm_started:
         pwm.stop()
     GPIO.cleanup()
     picam2.stop()
     cv2.destroyAllWindows()
+
 ```
 
 # Bill of Materials
