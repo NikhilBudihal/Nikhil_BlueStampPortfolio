@@ -129,7 +129,7 @@ def turn_off_leds():
     dots.show()
 
 # === Joystick Setup ===
-BUTTON_PIN = board.D17  # Not used here, but can be if desired
+BUTTON_PIN = board.D17  # Not used here but can be used later
 JOYDOWN_PIN = board.D27
 JOYLEFT_PIN = board.D22
 JOYUP_PIN = board.D23
@@ -162,13 +162,24 @@ def set_angle(angle, delay=0.4):
     time.sleep(delay)
     pwm.ChangeDutyCycle(0)
 
+# Side switch flag for joystick LEFT
+side_switched = False
+
 def tilt_servo(label):
     if label == "Penny":
-        print("🟢 Penny detected — tilting RIGHT")
-        set_angle(120)
+        if not side_switched:
+            print("🟢 Penny detected — tilting RIGHT")
+            set_angle(120)
+        else:
+            print("🟢 Penny detected — tilting LEFT (switched)")
+            set_angle(60)
     elif label == "Quarter":
-        print("🔴 Quarter detected — tilting LEFT")
-        set_angle(60)
+        if not side_switched:
+            print("🔴 Quarter detected — tilting LEFT")
+            set_angle(60)
+        else:
+            print("🔴 Quarter detected — tilting RIGHT (switched)")
+            set_angle(120)
     time.sleep(0.4)
     print("↩️ Returning to CENTER")
     set_angle(90)
@@ -224,37 +235,62 @@ wave_index = 0
 last_wave_update = time.time()
 WAVE_DELAY = 0.3  # seconds between LED steps
 
+# === NEW: Page switching variables ===
+current_page = 0
+max_pages = 4
+last_joystick_time = 0
+JOYSTICK_DELAY = 0.4
+
+confidence_history = []
+
 print("🚦 Ready. Servo stays at 90° until a confident match is held for 1 second.")
-print("🔄 Joystick UP to reset counters. Joystick DOWN to reset servo. Joystick SELECT to quit.")
+print("🔄 Joystick UP to reset counters. Joystick DOWN to reset servo.")
+print("🔀 Joystick LEFT to toggle side switch AND move page backward.")
+print("➡️ Joystick RIGHT to move page forward.")
+print("🛑 Joystick SELECT to quit.")
 
 try:
     while True:
         frame = picam2.capture_array()
         resized = cv2.resize(frame, (width, height))
-
         label_id, confidence = classify_image(resized)
         label = labels[label_id]
         now = time.time()
 
-        # Check joystick DOWN for servo reset
+        # === NEW: Joystick page controls ===
+        if not joyleft.value and (now - last_joystick_time > JOYSTICK_DELAY):
+            current_page = (current_page - 1) % max_pages
+            side_switched = not side_switched  # toggle side switch on left press as before
+            print(f"⬅️ Page changed to {current_page}, side_switched toggled to {side_switched}")
+            last_joystick_time = now
+            time.sleep(0.2)
+
+        if not joyright.value and (now - last_joystick_time > JOYSTICK_DELAY):
+            current_page = (current_page + 1) % max_pages
+            print(f"➡️ Page changed to {current_page}")
+            last_joystick_time = now
+            time.sleep(0.2)
+
+        # Joystick DOWN to reset servo
         if not joydown.value:
             print("↩️ Joystick DOWN pressed — resetting servo to 90°")
             set_angle(90)
-            time.sleep(0.5)  # debounce
+            time.sleep(0.5)
 
-        # Check joystick SELECT to quit
+        # Joystick SELECT to quit
         if not joyselect.value:
             print("🛑 Joystick SELECT pressed. Exiting program.")
             break
 
-        # Check joystick UP to reset counters
+        # Joystick UP to reset counters
         if not joyup.value:
             penny_count = 0
             quarter_count = 0
+            confidence_history.clear()
             print("🔄 Counters reset by joystick UP.")
-            time.sleep(0.5)  # debounce
+            time.sleep(0.5)
 
-        # Check for confident detection of Penny or Quarter
+        # Confident detection logic
         if confidence >= CONFIDENCE_THRESHOLD and label in ["Penny", "Quarter"]:
             # Set LEDs: green for Penny, red for Quarter
             if label == "Penny":
@@ -265,6 +301,10 @@ try:
                 for i in range(3):
                     dots[i] = (255, 0, 0)
                 dots.show()
+
+            confidence_history.append(confidence)
+            if len(confidence_history) > 30:
+                confidence_history.pop(0)
 
             if label == current_label:
                 if start_time is None:
@@ -289,37 +329,67 @@ try:
             # Blue wave animation on idle
             if now - last_wave_update > WAVE_DELAY:
                 for i in range(3):
-                    if i == wave_index:
-                        dots[i] = (0, 0, 255)  # bright blue
-                    else:
-                        dots[i] = (0, 0, 50)   # dim blue
+                    dots[i] = (0, 0, 255) if i == wave_index else (0, 0, 50)
                 dots.show()
                 wave_index = (wave_index + 1) % 3
                 last_wave_update = now
 
-        # === Overlay Display ===
-        display_frame = cv2.resize(frame, (244, 244))
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        frame_h, frame_w = display_frame.shape[:2]
+        # === Display pages ===
+        display_frame = np.zeros((300, 300, 3), dtype=np.uint8)
 
-        font_scale = 0.65
-        line_height = 25
-        left_x = 10
-        y_start = 25
+        if current_page == 0:
+            # Page 0: Original main detection view
+            display_frame = cv2.resize(frame, (300, 300))
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            total_value = (penny_count * 0.01) + (quarter_count * 0.25)
+            cv2.putText(display_frame, f"Total: ${total_value:.2f}", (10, 25), font, 0.6, (255, 255, 255), 2)
+            cv2.putText(display_frame, f"Pennies: {penny_count}", (10, 55), font, 0.6, (0, 200, 255), 2)
+            cv2.putText(display_frame, f"Quarters: {quarter_count}", (10, 85), font, 0.6, (0, 200, 255), 2)
+            if confidence >= CONFIDENCE_THRESHOLD:
+                label_color = (0, 255, 0) if confidence >= 0.75 else (0, 0, 255)
+                cv2.putText(display_frame, f"{label}", (90, 290), font, 0.7, label_color, 2)
 
-        total_value = (penny_count * 0.01) + (quarter_count * 0.25)
-        cv2.putText(display_frame, f"Total: ${total_value:.2f}", (left_x, y_start), font, font_scale, (255, 255, 255), 2)
-        cv2.putText(display_frame, f"Pennies: {penny_count}", (left_x, y_start + line_height), font, font_scale, (0, 200, 255), 2)
-        cv2.putText(display_frame, f"Quarters: {quarter_count}", (left_x, y_start + 2 * line_height), font, font_scale, (0, 200, 255), 2)
+        elif current_page == 1:
+            # Page 1: Bar graph of pennies and quarters
+            total_height = 200
+            bar_w = 60
+            max_count = max(penny_count, quarter_count, 1)
+            penny_bar = int((penny_count / max_count) * total_height)
+            quarter_bar = int((quarter_count / max_count) * total_height)
+            cv2.rectangle(display_frame, (60, 250 - penny_bar), (60 + bar_w, 250), (0, 255, 0), -1)
+            cv2.rectangle(display_frame, (180, 250 - quarter_bar), (180 + bar_w, 250), (0, 0, 255), -1)
+            cv2.putText(display_frame, f"{penny_count}", (60, 240 - penny_bar), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            cv2.putText(display_frame, f"{quarter_count}", (180, 240 - quarter_bar), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            cv2.putText(display_frame, "Pennies", (50, 270), 0, 0.5, (255, 255, 255), 1)
+            cv2.putText(display_frame, "Quarters", (170, 270), 0, 0.5, (255, 255, 255), 1)
 
-        # Detected label – bottom center
-        if confidence >= CONFIDENCE_THRESHOLD:
-            label_text = f"{label}"
-            label_color = (0, 255, 0) if confidence >= 0.75 else (0, 0, 255)
-            (label_w, _), _ = cv2.getTextSize(label_text, font, 0.75, 2)
-            label_x = (frame_w - label_w) // 2
-            label_y = frame_h - 10
-            cv2.putText(display_frame, label_text, (label_x, label_y), font, 0.75, label_color, 2)
+        elif current_page == 2:
+            # Page 2: Pie chart of penny vs quarter proportions
+            total = penny_count + quarter_count
+            if total > 0:
+                penny_pct = int((penny_count / total) * 360)
+                quarter_pct = 360 - penny_pct
+                center = (150, 150)
+                radius = 100
+                cv2.ellipse(display_frame, center, (radius, radius), 0, 0, penny_pct, (0, 255, 0), -1)
+                cv2.ellipse(display_frame, center, (radius, radius), 0, penny_pct, 360, (0, 0, 255), -1)
+                cv2.putText(display_frame, f"Penny: {penny_count}", (50, 280), 0, 0.5, (0, 255, 0), 2)
+                cv2.putText(display_frame, f"Quarter: {quarter_count}", (150, 280), 0, 0.5, (0, 0, 255), 2)
+            else:
+                cv2.putText(display_frame, "No coins yet!", (70, 150), 0, 0.7, (200, 200, 200), 2)
+
+        elif current_page == 3:
+            # Page 3: Line graph of recent confidence values
+            graph_height = 200
+            base_x = 10
+            base_y = 250
+            for i in range(1, len(confidence_history)):
+                x1 = base_x + (i - 1) * 8
+                y1 = base_y - int(confidence_history[i - 1] * graph_height)
+                x2 = base_x + i * 8
+                y2 = base_y - int(confidence_history[i] * graph_height)
+                cv2.line(display_frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
+            cv2.putText(display_frame, "Confidence History", (60, 20), 0, 0.6, (255, 255, 255), 2)
 
         cv2.imshow(WINDOW_NAME, display_frame)
 
@@ -330,6 +400,7 @@ try:
         elif key == ord('r'):
             penny_count = 0
             quarter_count = 0
+            confidence_history.clear()
             print("🔄 Counters reset (keyboard).")
 
 finally:
@@ -340,6 +411,7 @@ finally:
     GPIO.cleanup()
     picam2.stop()
     cv2.destroyAllWindows()
+
 
 ```
 
