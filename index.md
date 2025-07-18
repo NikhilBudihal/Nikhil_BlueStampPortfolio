@@ -57,6 +57,8 @@ I also gained mechanical fabrication skills, learning how to safely and effectiv
 
 From a networking perspective, I learned how to remotely connect to the Raspberry Pi using SSH (Secure Shell) for command-line access, and VNC (Virtual Network Computing) to control the Pi’s desktop interface from my own computer. This allowed me to develop and test code without needing a dedicated monitor and keyboard for the Pi. I also learned to use SCP (Secure Copy Protocol) to transfer files like trained machine learning models and Python scripts between my Raspberry Pi and my Mac securely over the local network. Overall, the project gave me a strong foundation in CAD design, electronics, embedded systems, remote computing, and hands-on building. 
 
+<img src="IMG_2792.jpg" width="200" height ="275"> <img src="IMG_2793.jpg" width="200" height ="275">  <img src="IMG_2798.jpg" width="200" height ="275">  <img src="IMG_2799.jpg" width="200" height ="275"> <img src="IMG_27800.jpg" width="200" height ="275"> 
+
 # Second Milestone
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.** -->
