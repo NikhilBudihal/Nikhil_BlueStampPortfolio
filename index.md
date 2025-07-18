@@ -10,6 +10,16 @@ Imagine dropping a coin onto a platform and watching as a smart system instantly
 <!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.** -->
 
 <img src="NikhilB.jpg" width="400" height ="500">
+
+# Modifications
+
+As part of my ongoing modifications to the coin sorter project, I successfully completed several important tasks that enhanced both its functionality and usability. One key milestone was designing and implementing the baseplate, which provides a stable and precise platform for mounting the servo, rotating mechanism, camera, and other components. This upgrade improved the mechanical stability and reliability of the sorting process.
+
+To improve user feedback, I integrated DotStar LEDs and developed custom LED patterns to clearly indicate the system’s state. Green LEDs light up when a penny is detected, red when a quarter is recognized, and a soothing blue wave animation runs during idle periods. These visual cues make the system’s operation much more intuitive, allowing for quick understanding without needing to focus on the screen.
+
+An often overlooked but critical enhancement was wire management. I reorganized and secured all wiring using clips and thoughtful routing along the baseplate, which greatly reduced cable clutter and prevented interference with moving parts. This attention to detail increased system robustness and made future maintenance and troubleshooting far easier.
+
+For improved data visualization, I added several graphical interfaces as part of my modifications. These include a pie chart displaying the proportion of pennies to quarters detected, a bar chart comparing counts of each coin type, and a confidence line graph tracking the machine learning model’s recent classification confidence. These tools provide valuable insights at a glance and help monitor system performance in real time.
   
 # Final Milestone
 
