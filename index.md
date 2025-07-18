@@ -23,7 +23,7 @@ Another critical upgrade was focused on wire management. I carefully routed and 
 
 For data visualization, I added several graphical display pages that significantly enhance monitoring capabilities. These include a pie chart illustrating the proportion of pennies versus quarters detected, a bar chart showing the relative counts of each coin type, and a confidence line graph tracking the recent detection confidence scores from the machine learning model. Together, these visualizations provide intuitive and valuable insights into the system’s performance and accuracy in real time.
 
-<img src="IMG_2794.jpg" width="225" height ="300"> <img src="IMG_2795.jpg" width="225" height ="300">  <img src="IMG_2796.jpg" width="225" height ="300">  <img src="IMG_2797.jpg" width="225" height ="300">   
+<img src="IMG_2794.jpg" width="200" height ="275"> <img src="IMG_2795.jpg" width="200" height ="275">  <img src="IMG_2796.jpg" width="200" height ="275">  <img src="IMG_2797.jpg" width="200" height ="275">   
   
 # Final Milestone
 
