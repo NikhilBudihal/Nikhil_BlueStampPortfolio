@@ -13,13 +13,15 @@ Imagine dropping a coin onto a platform and watching as a smart system instantly
 
 # Modifications
 
-As part of my ongoing modifications to the coin sorter project, I successfully completed several important tasks that enhanced both its functionality and usability. One key milestone was designing and implementing the baseplate, which provides a stable and precise platform for mounting the servo, rotating mechanism, camera, and other components. This upgrade improved the mechanical stability and reliability of the sorting process.
+As part of my ongoing modifications to the coin sorter project, I completed several key enhancements that significantly improved the system’s organization and usability. One important milestone was designing the baseplate, which serves as a stable mounting platform specifically for the Raspberry Pi, the coin sorter assembly, the wiring harness, and the custom HAT case. By consolidating these main components onto a single baseplate, I improved the project’s structural integrity and simplified cable routing.
 
-To improve user feedback, I integrated DotStar LEDs and developed custom LED patterns to clearly indicate the system’s state. Green LEDs light up when a penny is detected, red when a quarter is recognized, and a soothing blue wave animation runs during idle periods. These visual cues make the system’s operation much more intuitive, allowing for quick understanding without needing to focus on the screen.
+To protect and neatly house the electronics, I designed a custom Cadded case specifically for the Adafruit BrainCraft HAT. This enclosure provides secure protection for the HAT board, allowing for proper ventilation and easy access to ports. The case mounts directly on the baseplate alongside the Raspberry Pi and coin sorter, keeping the hardware organized and shielded from dust and mechanical damage.
 
-An often overlooked but critical enhancement was wire management. I reorganized and secured all wiring using clips and thoughtful routing along the baseplate, which greatly reduced cable clutter and prevented interference with moving parts. This attention to detail increased system robustness and made future maintenance and troubleshooting far easier.
+Enhancing the user interface, I integrated DotStar LEDs with custom LED patterns that provide clear, real-time visual feedback. The system lights up green LEDs when a penny is detected, red LEDs for quarters, and displays a subtle blue wave animation during idle or waiting states. These patterns make it easier to quickly understand the system status at a glance without relying solely on the display.
 
-For improved data visualization, I added several graphical interfaces as part of my modifications. These include a pie chart displaying the proportion of pennies to quarters detected, a bar chart comparing counts of each coin type, and a confidence line graph tracking the machine learning model’s recent classification confidence. These tools provide valuable insights at a glance and help monitor system performance in real time.
+Another critical upgrade was focused on wire management. I carefully routed and secured all wiring along the baseplate using cable clips and channels to minimize clutter and prevent interference with moving components. This organized approach improved reliability, reduced the chance of accidental disconnections, and simplified maintenance.
+
+For data visualization, I added several graphical display pages that significantly enhance monitoring capabilities. These include a pie chart illustrating the proportion of pennies versus quarters detected, a bar chart showing the relative counts of each coin type, and a confidence line graph tracking the recent detection confidence scores from the machine learning model. Together, these visualizations provide intuitive and valuable insights into the system’s performance and accuracy in real time.
   
 # Final Milestone
 
